@@ -14,3 +14,5 @@ npm run start:prod
 
 -   TypeScript
 -   NestJS
+-   class-validator
+-   class-transformer
