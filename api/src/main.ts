@@ -5,9 +5,11 @@ import {configValidator} from "./configs/validator.config";
 import {ConfigService} from "@nestjs/config";
 import {Logger} from "@nestjs/common";
 import {configSwagger} from "./configs/swagger.config";
+import {configCors} from "./configs/cors.config";
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
+	configCors(app);
 	configValidator(app, app.select(AppModule));
 
 	const configService = app.get(ConfigService);
