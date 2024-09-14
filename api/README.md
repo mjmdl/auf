@@ -17,3 +17,5 @@ npm run start:prod
 -   class-validator
 -   class-transformer
 -   dotenv
+-   TypeOrm
+-   pg
