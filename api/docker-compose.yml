@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+    auf_postgres:
+        container_name: auf_postgres
+        image: postgres:16
+        restart: no
+        volumes:
+            - /var/lib/data:/var/lib/data
+        ports:
+            - ${postgresPort}:5432
+        environment:
+            POSTGRES_USER: ${postgresUsername}
+            POSTGRES_PASSWORD: ${postgresPassword}
+            POSTGRES_DB: ${postgresDatabase}
