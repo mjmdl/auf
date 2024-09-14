@@ -9,6 +9,13 @@ export class AccountRepository implements AccountSource {
 	@InjectRepository(AccountEntity)
 	private readonly accountRepository: Repository<AccountEntity>;
 
+	async find(where: Partial<AccountEntity>): Promise<AccountEntity> {
+		return this.accountRepository.findOne({
+			select: {id: true, username: true, password: true, personId: true},
+			where,
+		});
+	}
+
 	async exists(where: Partial<AccountEntity>): Promise<boolean> {
 		return this.accountRepository.existsBy(where);
 	}

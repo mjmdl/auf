@@ -38,6 +38,14 @@ class EnvironmentDto {
 	@Min(1)
 	@Type(() => Number)
 	hashSaltRounds: number = 10;
+
+	@IsNotEmpty()
+	@IsString()
+	sessionSecret: string;
+
+	@IsNotEmpty()
+	@IsString()
+	sessionDuration: string = "192h";
 }
 
 export const configModuleOptions: ConfigModuleOptions = {
