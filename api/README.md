@@ -16,3 +16,4 @@ npm run start:prod
 -   NestJS
 -   class-validator
 -   class-transformer
+-   dotenv
