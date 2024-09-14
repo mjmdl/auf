@@ -21,3 +21,4 @@ npm run start:prod
 -   pg
 -   Swagger
 -   bcrypt
+-   jwt
