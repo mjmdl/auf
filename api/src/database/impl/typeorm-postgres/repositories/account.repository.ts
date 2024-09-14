@@ -8,4 +8,13 @@ import {Repository} from "typeorm";
 export class AccountRepository implements AccountSource {
 	@InjectRepository(AccountEntity)
 	private readonly accountRepository: Repository<AccountEntity>;
+
+	async exists(where: Partial<AccountEntity>): Promise<boolean> {
+		return this.accountRepository.existsBy(where);
+	}
+
+	async insert(person: Partial<AccountEntity>): Promise<Partial<AccountEntity>> {
+		const insertion = await this.accountRepository.insert(person);
+		return insertion.identifiers[0];
+	}
 }

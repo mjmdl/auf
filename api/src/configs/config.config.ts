@@ -1,7 +1,7 @@
 import {Logger} from "@nestjs/common";
 import {ConfigModuleOptions} from "@nestjs/config";
 import {Transform, Type, plainToInstance} from "class-transformer";
-import {IsBoolean, IsNotEmpty, IsPort, IsString, IsUrl, validateSync} from "class-validator";
+import {IsBoolean, IsInt, IsNotEmpty, IsNumber, IsPort, IsString, IsUrl, Min, validateSync} from "class-validator";
 
 class EnvironmentDto {
 	@IsNotEmpty()
@@ -32,6 +32,12 @@ class EnvironmentDto {
 	@IsBoolean()
 	@Transform(({value}) => (typeof value === "boolean" ? value : value === "true"))
 	typeormSynchronizePostgres: boolean = false;
+
+	@IsNotEmpty()
+	@IsInt()
+	@Min(1)
+	@Type(() => Number)
+	hashSaltRounds: number = 10;
 }
 
 export const configModuleOptions: ConfigModuleOptions = {

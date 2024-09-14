@@ -8,4 +8,18 @@ import {Repository} from "typeorm";
 export class PersonRepository implements PersonSource {
 	@InjectRepository(PersonEntity)
 	private readonly personRepository: Repository<PersonEntity>;
+
+	async exists(where: Partial<PersonEntity>): Promise<boolean> {
+		return this.personRepository.existsBy(where);
+	}
+
+	async insert(person: Partial<PersonEntity>): Promise<Partial<PersonEntity>> {
+		const insertion = await this.personRepository.insert(person);
+		return insertion.identifiers[0];
+	}
+
+	async delete(where: Partial<PersonEntity>): Promise<number> {
+		const deletion = await this.personRepository.delete(where);
+		return deletion.affected;
+	}
 }

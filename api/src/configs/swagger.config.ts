@@ -4,6 +4,7 @@ const openApiConfig = new DocumentBuilder()
 	.setTitle(process.env.npm_package_name)
 	.setDescription(process.env.npm_package_description)
 	.setVersion(process.env.npm_package_version)
+	.addTag("Authentication", "Sign-up and log-in.")
 	.addTag("default")
 	.build();
 

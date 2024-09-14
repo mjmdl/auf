@@ -3,5 +3,6 @@ import {TypeOrmPostgresModule} from "./impl/typeorm-postgres/typeorm-postgres.mo
 
 @Module({
 	imports: [TypeOrmPostgresModule],
+	exports: [TypeOrmPostgresModule],
 })
 export class DatabaseModule {}
