@@ -1,4 +1,5 @@
 import {PersonModel} from "./person.model";
+import {SessionModel} from "./session.model";
 
 export const accountRules = {
 	usernameMin: 3,
@@ -14,4 +15,5 @@ export class AccountModel {
 	password: string;
 	personId: string;
 	person: PersonModel;
+	sessions: SessionModel[];
 }

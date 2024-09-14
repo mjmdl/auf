@@ -3,7 +3,7 @@ import {Column, Entity, OneToOne, PrimaryGeneratedColumn, Unique} from "typeorm"
 import {AccountEntity} from "./account.entity";
 
 @Entity("person")
-@Unique("uq_email", ["email"])
+@Unique("email_uq", ["email"])
 export class PersonEntity implements PersonModel {
 	@PrimaryGeneratedColumn("uuid", {name: "id"})
 	id: string;

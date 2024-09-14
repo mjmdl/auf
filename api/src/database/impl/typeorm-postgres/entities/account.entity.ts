@@ -1,9 +1,10 @@
 import {AccountModel, accountRules} from "src/database/models/account.model";
-import {Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, Unique} from "typeorm";
+import {Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique} from "typeorm";
 import {PersonEntity} from "./person.entity";
+import {SessionEntity} from "./session.entity";
 
 @Entity("account")
-@Unique("uq_username", ["username"])
+@Unique("username_uq", ["username"])
 export class AccountEntity implements AccountModel {
 	@PrimaryGeneratedColumn("uuid", {name: "id", primaryKeyConstraintName: "pk_account"})
 	id: string;
@@ -18,6 +19,9 @@ export class AccountEntity implements AccountModel {
 	personId: string;
 
 	@OneToOne(() => PersonEntity, person => person.account)
-	@JoinColumn({name: "person_id", referencedColumnName: "id", foreignKeyConstraintName: "fk_person"})
+	@JoinColumn({name: "person_id", referencedColumnName: "id", foreignKeyConstraintName: "person_fk"})
 	person: PersonEntity;
+
+	@OneToMany(() => SessionEntity, session => session.account)
+	sessions: SessionEntity[];
 }
