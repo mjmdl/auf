@@ -19,3 +19,5 @@ npm run start:prod
 -   dotenv
 -   TypeOrm
 -   pg
+-   Swagger
+-   bcrypt
