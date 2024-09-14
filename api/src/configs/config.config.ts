@@ -1,12 +1,37 @@
 import {Logger} from "@nestjs/common";
 import {ConfigModuleOptions} from "@nestjs/config";
-import {plainToInstance} from "class-transformer";
-import {IsNotEmpty, IsPort, validateSync} from "class-validator";
+import {Transform, Type, plainToInstance} from "class-transformer";
+import {IsBoolean, IsNotEmpty, IsPort, IsString, IsUrl, validateSync} from "class-validator";
 
 class EnvironmentDto {
 	@IsNotEmpty()
 	@IsPort()
 	serverPort: number = 3000;
+
+	@IsNotEmpty()
+	@IsUrl()
+	postgresHost: string = "127.0.0.1";
+
+	@IsNotEmpty()
+	@IsPort()
+	postgresPort: number = 5432;
+
+	@IsNotEmpty()
+	@IsString()
+	postgresUsername: string = "postgres";
+
+	@IsNotEmpty()
+	@IsString()
+	postgresPassword: string = "postgres";
+
+	@IsNotEmpty()
+	@IsString()
+	postgresDatabase: string = "auf";
+
+	@IsNotEmpty()
+	@IsBoolean()
+	@Transform(({value}) => (typeof value === "boolean" ? value : value === "true"))
+	typeormSynchronizePostgres: boolean = false;
 }
 
 export const configModuleOptions: ConfigModuleOptions = {
