@@ -4,6 +4,7 @@ import {AppModule} from "./app.module";
 import {configValidator} from "./configs/validator.config";
 import {ConfigService} from "@nestjs/config";
 import {Logger} from "@nestjs/common";
+import {configSwagger} from "./configs/swagger.config";
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
@@ -11,12 +12,14 @@ async function bootstrap() {
 
 	const configService = app.get(ConfigService);
 	const serverPort = configService.getOrThrow("serverPort");
+	const docsPath = configSwagger(app);
 
-	await app.listen(serverPort, () => logServerPort(app.getUrl()));
+	await app.listen(serverPort, () =>
+		app.getUrl().then(url => {
+			const logger = new Logger(bootstrap.name);
+			logger.verbose(`Listening to port ${url}.`);
+			logger.verbose(`Docs available at ${url}/${docsPath}`);
+		}),
+	);
 }
 bootstrap();
-
-function logServerPort(url: Promise<string>): void {
-	const logger = new Logger(bootstrap.name);
-	url.then(url => logger.verbose(`Listening to port ${url}.`));
-}
