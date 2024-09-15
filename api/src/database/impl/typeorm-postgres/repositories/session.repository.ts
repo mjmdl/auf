@@ -10,8 +10,21 @@ export class SessionRepository implements SessionSource {
 	@InjectRepository(SessionEntity)
 	private readonly sessionRepository: Repository<SessionEntity>;
 
+	async find(where: Partial<SessionModel>): Promise<Partial<SessionModel>> {
+		const session = await this.sessionRepository.findOne({
+			select: {id: true, accountId: true, expiresAt: true, kind: true, token: true},
+			where,
+		});
+		return session;
+	}
+
 	async insert(session: Partial<SessionModel>): Promise<Partial<SessionModel>> {
 		const insertion = await this.sessionRepository.insert(session);
 		return insertion.identifiers[0];
+	}
+
+	async delete(where: Partial<SessionModel>): Promise<number> {
+		const deletion = await this.sessionRepository.delete(where);
+		return deletion.affected;
 	}
 }
