@@ -6,10 +6,12 @@ import {HashModule} from "src/hash/hash.module";
 import {TokenModule} from "src/token/token.module";
 import {LogInController} from "./feats/login/login.controller";
 import {LogInService} from "./feats/login/login.service";
+import {LogOutController} from "./feats/logout/logout.controller";
+import {LogOutService} from "./feats/logout/logout.service";
 
 @Module({
 	imports: [DatabaseModule, HashModule, TokenModule],
-	controllers: [SignUpController, LogInController],
-	providers: [SignUpService, LogInService],
+	controllers: [SignUpController, LogInController, LogOutController],
+	providers: [SignUpService, LogInService, LogOutService],
 })
 export class AuthenticModule {}
