@@ -2,7 +2,7 @@ import {ExecutionContext, Inject, Injectable} from "@nestjs/common";
 import {ConfigService} from "@nestjs/config";
 import {Reflector} from "@nestjs/core";
 import {Request} from "express";
-import {UserDto} from "src/authentic/feats/login/dtos/user.dto";
+import {UserDto} from "src/authorize/dtos/user.dto";
 import {isPublicKey} from "src/authorize/decorators/is-public.decorator";
 import {SessionKind} from "src/database/models/session.model";
 import {SessionSource} from "src/database/sources/session.source";

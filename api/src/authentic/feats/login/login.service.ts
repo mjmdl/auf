@@ -6,7 +6,7 @@ import {HashService} from "src/hash/hash.service";
 import {TokenService} from "src/token/token.service";
 import {SessionSource} from "src/database/sources/session.source";
 import {ConfigService} from "@nestjs/config";
-import {UserDto} from "./dtos/user.dto";
+import {UserDto} from "src/authorize/dtos/user.dto";
 import {SessionKind} from "src/database/models/session.model";
 
 @Injectable()
