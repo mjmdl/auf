@@ -3,7 +3,7 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {SessionModel} from "src/database/models/session.model";
 import {SessionSource} from "src/database/sources/session.source";
 import {SessionEntity} from "../entities/session.entity";
-import {Repository} from "typeorm";
+import {LessThan, Repository} from "typeorm";
 
 @Injectable()
 export class SessionRepository implements SessionSource {
@@ -25,6 +25,11 @@ export class SessionRepository implements SessionSource {
 
 	async delete(where: Partial<SessionModel>): Promise<number> {
 		const deletion = await this.sessionRepository.delete(where);
+		return deletion.affected;
+	}
+
+	async deleteExpired(): Promise<number> {
+		const deletion = await this.sessionRepository.delete({expiresAt: LessThan(new Date())});
 		return deletion.affected;
 	}
 }
